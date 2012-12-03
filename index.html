@@ -157,39 +157,44 @@
 
 <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-36770472-1']);
-  _gaq.push(['_setDomainName', 'leidenforfoodies.com']);
-  _gaq.push(['_trackPageview']);
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-36770472-1']);
+	_gaq.push(['_setDomainName', 'leidenforfoodies.com']);
+	_gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
 
-  // Link the addresses up
-  (function(){
-  	if ( ! document.getElementsByClassName) return;
+	// Link the addresses up
+	(function(){
 
-  	var els = document.getElementsByClassName('address');
+		// Only if we can get them by class name
+		if ( ! document.getElementsByClassName) return;
 
-  	for (var i = els.length; i--;) {
-  		var el  = els[i],
-  			txt = el.innerHTML,
-  			tmpl = '<a href="{url}">{text}</a>';
+		// Get li.address and set link template
+		var els  = document.getElementsByClassName('address'),
+			tmpl = '<a target="_blank" href="http://maps.google.com/maps?q={loc},+Leiden,+the+Netherlands">{text}</a>';
 
-  		var addresses = txt.split(' or ');
+		// Loop through addresses
+		for (var i = els.length; i--;) {
 
-  		for (var j in addresses) {
-  			var url  = 'http://maps.google.com/maps?q=' + addresses[j].replace(/\s+/, '+') + ',+Leiden,+the+Netherlands';
-  			var link = tmpl.replace('{url}', url).replace('{text}', addresses[j]);
-  			txt = txt.replace(addresses[j], link);
-  		}
+			var el  = els[i], // Current element
+				txt = el.innerHTML, // element's text
+				loc = txt.split(' or '); // locations
 
-  		el.innerHTML = txt;
-  	}
-  })();
+			// Loop through each location and create link
+			for (var j in loc) {
+				var link = tmpl.replace('{loc}', loc[j].replace(/\s+/, '+')).replace('text', loc[j]);
+				txt = txt.replace(loc[j], link);
+			}
+
+			el.innerHTML = txt;
+		}
+
+	})();
 
 </script>
 
