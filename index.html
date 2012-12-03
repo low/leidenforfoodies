@@ -187,7 +187,7 @@
 
 			// Loop through each location and create link
 			for (var j in loc) {
-				var link = tmpl.replace('{loc}', loc[j].replace(/\s+/, '+')).replace('text', loc[j]);
+				var link = tmpl.replace('{loc}', loc[j].replace(/\s+/, '+')).replace('{text}', loc[j]);
 				txt = txt.replace(loc[j], link);
 			}
 
