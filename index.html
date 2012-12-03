@@ -43,7 +43,7 @@
 		<ul>
 			<li class="address">Vrouwensteeg 16</li>
 			<li><a href="http://www.victorrusso.nl/osteria">www.victorrusso.nl/osteria</a></li>
-			<li>Closed on Monday &amp; Tuesday</li>
+			<li>Closed on Monday</li>
 		</ul>
 
 		<h2>Burgerzaken</h2>
@@ -166,6 +166,29 @@
     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  // Link the addresses up
+  (function(){
+  	if ( ! document.getElementsByClassName) return;
+
+  	var els = document.getElementsByClassName('address');
+
+  	for (var i = els.length; i--;) {
+  		var el  = els[i],
+  			txt = el.innerHTML,
+  			tmpl = '<a href="{url}">{text}</a>';
+
+  		var addresses = txt.split(' or ');
+
+  		for (var j in addresses) {
+  			var url  = 'http://maps.google.com/maps?q=' + addresses[j].replace(/\s+/, '+') + ',+Leiden,+the+Netherlands';
+  			var link = tmpl.replace('{url}', url).replace('{text}', addresses[j]);
+  			txt = txt.replace(addresses[j], link);
+  		}
+
+  		el.innerHTML = txt;
+  	}
   })();
 
 </script>
