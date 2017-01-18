@@ -107,7 +107,7 @@ ul {
 	margin-top:.75em;
 }
 
-@media screen and (max-width:320px) {
+@media screen and (max-width:375px) {
 
 	header, footer, #content {
 		padding:2em 1.5em;
